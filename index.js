@@ -10,8 +10,8 @@ const app = express();
 
 // Base URL for the API
 // const base_url = "https://api.example.com";
-//const base_url = "http://node57538-phattanapisitk.proen.app.ruk-com.cloud";
-const base_url = "http://localhost:3000";
+const base_url = "http://node57538-phattanapisitk.proen.app.ruk-com.cloud";
+//const base_url = "http://localhost:3000";
 
 // Set the template engine
 app.set("views", path.join(__dirname, "/public/views"));
@@ -35,7 +35,7 @@ app.get("/", async (req, res) => {
 
 app.get("/book/:id", async (req, res) => {
     try {
-        const response = await axios.get(base_url + '/books' + req.params.id);
+        const response = await axios.get(base_url + '/books/' + req.params.id);
         res.render("book", { book: response.data });
     } catch (err) {
         console.error(err);
@@ -72,7 +72,7 @@ app.get("/update/:id", async (req, res) => {
 app.post("/update/:id", async (req, res) => {
     try {
         const data = { title: req.body.title, author: req.body.author };
-        await axios.put(base_url + '/books' + req.params.id, data);
+        await axios.put(base_url + '/books/' + req.params.id, data);
         res.redirect("/");
     } catch (err) {
         console.error(err);
@@ -82,7 +82,7 @@ app.post("/update/:id", async (req, res) => {
 
 app.get("/delete/:id", async (req, res) => {
     try {
-        await axios.delete(base_url + '/books' + req.params.id);
+        await axios.delete(base_url + '/books/' + req.params.id);
         res.redirect("/");
     } catch (err) {
         console.error(err);
